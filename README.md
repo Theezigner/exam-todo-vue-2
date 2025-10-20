@@ -1,218 +1,362 @@
-# Todo App – Frontend Examination Project
+# Todo App – Fullstack Examination Project (Vue 3)
 
 ## Overview
 
-This project is a single-page Todo application developed using React as part of the AltSchool Africa Frontend Engineering Second Semester Examination. It showcases the application of modern frontend development practices, with a focus on usability, accessibility, performance, architectural clarity, **and TypeScript-first correctness**.
+This project is a single-page Todo application built with Vue 3, serving as a comprehensive demonstration of modern full-stack development and proficiency in frontend frameworks and data management.
 
-### Key Highlights
-- Built with **React 19** functional components and hooks
-- **TypeScript (TSX/TS)** across the codebase (strict mode + type-only imports)
-- Route-level data handling with TanStack Router
-- Integrated with REST API endpoints using Axios
-- Optimistic UI updates for a seamless user experience
-- Utility-first styling via Tailwind CSS and DaisyUI
-- Font customization using "Quicksand" via Google Fonts
-- SEO enhancements using `@unhead/react`
-- Focus management in modals (keyboard navigation, ESC to close, tabIndex control)
-- React Icons for visual cues (e.g., plus, trash, edit, status indicators)
-- Persistent query cache via localStorage (with Dexie.js as optional offline fallback)
-- Accessible and responsive design system with semantic HTML and ARIA roles
+The application features offline-first capabilities using Dexie.js for local data persistence with a beautiful, responsive interface.
 
-> **New:** The app was migrated from **.jsx / .js** to **.tsx / .ts**. See **TypeScript Migration Notes** below.
+## Key Highlights
+
+- **Modern Vue 3**: Built with Composition API and `<script setup>` syntax.
+- **Modern UI Framework**: Utilizes Tailwind CSS and DaisyUI for beautiful, responsive design.
+- **Offline-First Architecture**: Uses Dexie.js and LocalForage for local data persistence and offline support.
+- **Data Management**: Frontend data fetching and caching via TanStack Vue Query.
+- **TypeScript-First**: Rigorous use of TypeScript across the entire application.
+- **Theme Support**: Dark mode toggle with persistent theme preference.
+- **SEO Ready**: Integrated Unhead for meta tag management and SEO optimization.
 
 ## Live Demo
 
-- **Deployed App**: https://exam-todo-app-xi.vercel.app/
-- **Source Code**: https://github.com/Theezigner/exam-todo-app.git
+- **Deployed App**: [Update this link when deployed]
+- **Source Code**: [Insert Your GitHub URL Here]
 
 ## Table of Contents
 
 - [Installation](#installation)
-- [Scripts](#scripts)
-- [Technology Stack](#technology-stack)
+- [Technology Stack & Dependencies](#technology-stack--dependencies)
 - [Architecture](#architecture)
-- [TypeScript Migration Notes](#typescript-migration-notes)
-- [Features](#features)
-- [UI/UX Design](#uiux-design)
-- [Accessibility](#accessibility)
 - [API Documentation](#api-documentation)
-- [Screenshots](#screenshots)
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Environment Variables](#environment-variables)
+- [Scripts](#scripts)
 - [Known Issues](#known-issues)
 - [Future Improvements](#future-improvements)
+- [Contributing](#contributing)
 - [License](#license)
 - [Author](#author)
 
 ## Installation
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Theezigner/exam-todo-app.git
-   cd exam-todo-app
-   ```
+### Prerequisites
 
-2. Install dependencies:
-   ```bash
-   pnpm install
-   ```
+- Node.js (v16 or higher)
+- pnpm (recommended) or npm
+- Git
 
-3. Start the development server:
-   ```bash
-   pnpm run dev
-   ```
+### Setup Instructions
 
-## Scripts
+1. **Clone the repository:**
 
-| Command            | Description                      |
-|--------------------|----------------------------------|
-| `pnpm run dev`     | Starts local development server  |
-| `pnpm run build`   | Builds for production            |
-| `pnpm run preview` | Serves the production build      |
+```bash
+git clone [Your GitHub Repository URL]
+cd exam-todo-vue
+```
 
-## Technology Stack
+2. **Install dependencies:**
 
-- **React 19**
-- **TypeScript** (TSX/TS, `strict` + `verbatimModuleSyntax`)
-- **Vite** (build tool)
-- **Tailwind CSS** + **DaisyUI** (component styling)
-- **TanStack Router** (nested routing, route loaders, pending & error components)
-- **React Query** (data fetching, caching, persistence with fallback)
-- **Axios** (API requests)
-- **Dexie.js** (IndexedDB support for offline caching)
-- **React Hook Form** (form validation)
-- **React Icons**
-- **React Hot Toast** (notifications)
-- **@unhead/react** (SEO support and dynamic metadata)
-- **LocalStorage** (query persistence)
+```bash
+pnpm install
+# or
+npm install
+```
+
+3. **Configure environment variables (if needed):**
+
+Create a `.env` file in the root directory:
+
+```env
+VITE_TODO_API_URL=https://jsonplaceholder.typicode.com
+```
+
+4. **Start the development server:**
+
+```bash
+pnpm dev
+# or
+npm run dev
+```
+
+The application will be available at `http://localhost:5173` (or the port shown in your terminal).
+
+## Technology Stack & Dependencies
+
+### Frontend
+
+- **Framework**: Vue 3 (Composition API with `<script setup>`)
+- **Language**: TypeScript
+- **Build Tool**: Vite
+- **Package Manager**: pnpm
+- **State Management**: Vue's Composition API (ref, reactive, computed)
+- **Data Fetching**: TanStack Vue Query
+- **Offline Storage**: Dexie.js (IndexedDB wrapper) & LocalForage
+- **Routing**: Vue Router
+- **HTTP Client**: Axios
+- **Styling**: Tailwind CSS & DaisyUI
+- **Notifications**: vue-toastification & vue-hot-toast
+- **Icons**: @heroicons/vue & vue-icons-lib
+- **SEO**: Unhead (Vue head management)
+- **Linting**: ESLint with Vue plugin
 
 ## Architecture
 
-```plaintext
-src/
-├── components/            # Reusable modals, alerts, and buttons
-│   ├── createTodoModal.tsx
-│   ├── deleteTodoModal.tsx
-│   └── editTodoModal.tsx
-├── layouts/
-│   └── layout.tsx         # App layout with theme toggle and <Outlet />
-├── pages/
-│   ├── homePage.tsx
-│   └── TodoDetailPage.tsx
-├── routes/
-│   ├── root.route.tsx
-│   ├── home.route.tsx
-│   └── todoDetail.route.tsx
-├── utils/
-│   ├── axios.ts
-│   ├── dexieDB.ts         # Typed Dexie Table<Todo, ...>
-│   └── queryClient.ts
-├── screenshots/           # Page images
-├── App.tsx                # Root component and provider wrappers
-├── main.tsx               # Application bootstrap entry
-└── App.css
+The project employs a modern, component-based architecture:
+
+### Application Structure
+
+```
+Vue 3 Frontend (Port 5173)
+├── Pages (Route-based views)
+│   ├── homePage.vue (Main todo list)
+│   ├── todoDetailpage.vue (Individual todo)
+│   └── notFoundPage.vue (404 handler)
+│
+├── Components (Reusable UI elements)
+│   ├── createTodoModal.vue
+│   ├── editTodoModal.vue
+│   ├── deleteTodoModal.vue
+│   ├── themeToggle.vue
+│   ├── errorBoundary.vue
+│   └── errorComponent.vue
+│
+├── Layouts
+│   └── layout.vue (Main app wrapper)
+│
+├── Routes (Vue Router configuration)
+│   ├── home.route.ts
+│   ├── todoDetail.route.ts
+│   └── notFound.route.ts
+│
+└── Utils (Core functionality)
+    ├── axios.ts (HTTP client config)
+    ├── dexieDB.ts (IndexedDB setup)
+    └── queryClient.ts (TanStack Query config)
 ```
 
-## TypeScript Migration Notes
+### Data Flow
 
-- **File Extensions:** All React components moved from `.jsx` → `.tsx`; utilities from `.js` → `.ts`.
-- **Shared Types:** A canonical `Todo` type lives in `src/utils/dexieDB.ts` and is imported across pages, modals, routes, and loaders to avoid drift.
-- **Dexie Typing:** `db.todos` is typed as `Table<Todo, number>` (or `number | string` if needed), removing `any` casts and aligning with loader keys.
-- **Router Types:**  
-  - `useLoaderData` is used **without** a generic and cast to the loader’s return type (or via `getRouteApi(homeRoute.id)` if preferred).  
-  - `errorComponent` uses TanStack’s `ErrorComponentProps`.
-- **React Query:** Mutations are typed with `<TData, TError, TVariables>`. Cache updates normalize IDs with `String(id)` to handle number/string differences between online/offline data.
-- **Type-Only Imports:** Because `verbatimModuleSyntax` is enabled, types like `Table` are imported with `import type { Table } from "dexie"`.
-- **CSS Imports:** For TS to accept `*.css`, a global declaration is included (e.g., `src/vite-env.d.ts` with `declare module "*.css";`).
-- **Casing Consistency:** All imports match file casing exactly (Windows is case-insensitive but TypeScript is not).
-
-## Features
-
-- Fetch todos from JSONPlaceholder API
-- Paginated and searchable list of todos
-- View full task details via nested routes
-- Add, edit, and delete todos using modal dialogs
-- Optimistic UI for smooth interactions
-- Data persistence using React Query + LocalStorage
-- Optional offline support with Dexie.js
-- SEO metadata via `@unhead/react`
-- Responsive and accessible UI
-- ARIA support, role-based markup, and semantic HTML
-
-## UI/UX Design
-
-- Layout uses `max-w-md` container for readability
-- Consistent spacing and alignment with Tailwind utilities
-- Visually distinct button states and focus indicators
-- Accessible modals with keyboard interaction support
-- Skeleton loaders and toasts improve perceived performance
-- Modern and friendly font ("Quicksand") linked via HTML in `index.html`
-
-## Accessibility
-
-- Semantic HTML (`<main>`, `<section>`, `<article>`, etc.)
-- `aria-live`, `aria-label`, `aria-modal` used in dynamic components
-- Modals support `ESC` to close, `autoFocus`, and `tabIndex`
-- Buttons include `aria-label` for clarity
-- Color contrast tested for WCAG compliance
-- Screen reader-friendly alert and toast messages
+```
+User Action
+    ↓
+Vue Component
+    ↓
+TanStack Vue Query (Cache Layer)
+    ↓
+Axios → JSONPlaceholder API (Todos)
+    ↓
+Dexie.js (Local Persistence)
+    ↓
+UI Update (Reactive State)
+```
 
 ## API Documentation
 
-Base API: [`https://jsonplaceholder.typicode.com/todos`](https://jsonplaceholder.typicode.com/todos)
+### Todo API (Mock/Frontend-Managed)
 
-| Method | Endpoint       | Description             |
-|--------|----------------|-------------------------|
-| GET    | `/todos`       | Retrieve all todos      |
-| GET    | `/todos/:id`   | Retrieve single todo    |
-| POST   | `/todos`       | Create a new todo       |
-| PUT    | `/todos/:id`   | Update existing todo    |
-| DELETE | `/todos/:id`   | Delete a todo           |
+**Base API**: `https://jsonplaceholder.typicode.com`
 
-> **Note**: Since JSONPlaceholder is a mock API, changes are not persisted after a refresh. Local state, React Query, and Dexie.js are used to simulate persistence.
+#### Endpoints:
 
-## Screenshots
+- `GET /todos` - Fetch all todos
+- `GET /todos/:id` - Fetch a single todo
+- `POST /todos` - Create a new todo
+- `PUT /todos/:id` - Update a todo
+- `DELETE /todos/:id` - Delete a todo
 
-### Homepage
-Displays a paginated list of todos with a search bar.  
-![Homepage](./src/screenshots/homepage.png)
+## Features
 
-### Create Todo Modal
-Form to add a new todo with validation and keyboard accessibility.  
-![Create Modal](./src/screenshots/createTodo.png)
+- ✅ **Modern Vue 3 Architecture**: Built with Composition API and `<script setup>` syntax.
+- ✅ **CRUD Operations**: Full functionality to Create, Read, Update, and Delete Todos.
+- ✅ **Search & Pagination**: Efficient client-side searching and paginated display of the task list.
+- ✅ **Optimistic UI**: Provides instant feedback on create/update/delete actions while network requests run in the background.
+- ✅ **Offline Support**: Works without internet using Dexie.js and LocalForage for data persistence.
+- ✅ **Dark Mode**: Theme toggle with persistent preference storage.
+- ✅ **Accessibility (A11y)**: Uses semantic HTML, ARIA roles, and keyboard navigation support for modal dialogs.
+- ✅ **Error Handling**: Implemented TanStack Query's error/success handling with vue-toastification and vue-hot-toast for user notifications.
+- ✅ **Responsive Design**: Mobile-first approach with Tailwind CSS and DaisyUI components.
+- ✅ **TypeScript**: End-to-end type safety across the entire application.
+- ✅ **SEO Optimized**: Meta tag management with Unhead.
+- ✅ **Route-based Code Splitting**: Optimized loading with Vue Router.
+- ✅ **Screenshots Included**: Visual documentation of all major features.
 
-### Todo Detail Page
-Shows detailed status of a selected task with back navigation.  
-![Detail Page](./src/screenshots/Taskdetails.png)
+## Project Structure
 
-### Homepage Dark Mode
-Displays a paginated list of todos with a search bar in dark mode.  
-![Homepage](./src/screenshots/darkMode.png)
+```
+exam-todo-vue/
+├── README.md
+├── eslint.config.js
+├── index.html
+├── package.json
+├── pnpm-lock.yaml
+├── vite.config.ts
+├── tsconfig.json
+├── tsconfig.app.json
+├── tsconfig.node.json
+│
+├── public/
+│   ├── favicon.png
+│   └── vite.svg
+│
+├── src/
+│   ├── App.vue
+│   ├── App.css
+│   ├── main.ts
+│   ├── vite-env.d.ts
+│   │
+│   ├── assets/
+│   │   └── react.svg
+│   │
+│   ├── components/
+│   │   ├── createTodoModal.vue
+│   │   ├── deleteTodoModal.vue
+│   │   ├── editTodoModal.vue
+│   │   ├── errorBoundary.vue
+│   │   ├── errorComponent.vue
+│   │   └── themeToggle.vue
+│   │
+│   ├── layouts/
+│   │   └── layout.vue
+│   │
+│   ├── pages/
+│   │   ├── homePage.vue
+│   │   ├── notFoundPage.vue
+│   │   └── todoDetailpage.vue
+│   │
+│   ├── routes/
+│   │   ├── index.ts
+│   │   ├── home.route.ts
+│   │   ├── notFound.route.ts
+│   │   └── todoDetail.route.ts
+│   │
+│   ├── screenshots/
+│   │   ├── homepage.png
+│   │   ├── Taskdetails.png
+│   │   ├── createTodo.png
+│   │   ├── editModal.png
+│   │   ├── deleteTodo.png
+│   │   └── darkMode.png
+│   │
+│   └── utils/
+│       ├── axios.ts
+│       ├── dexieDB.ts
+│       └── queryClient.ts
+│
+└── node_modules/
+    ├── @eslint/
+    ├── @heroicons/
+    ├── @tailwindcss/
+    ├── @tanstack/
+    ├── @types/
+    ├── @unhead/
+    ├── @vitejs/
+    ├── @vue/
+    ├── axios/
+    ├── daisyui/
+    ├── dexie/
+    ├── eslint/
+    ├── eslint-plugin-vue/
+    ├── globals/
+    ├── localforage/
+    ├── tailwindcss/
+    ├── typescript/
+    ├── unhead/
+    ├── vite/
+    ├── vue/
+    ├── vue-hot-toast/
+    ├── vue-icons-lib/
+    ├── vue-router/
+    ├── vue-toastification/
+    └── vue-tsc/
+```
+
+## Environment Variables
+
+### Frontend (.env)
+
+Create a `.env` file in the root directory:
+
+```env
+# Todo API Configuration
+VITE_TODO_API_URL=https://jsonplaceholder.typicode.com
+
+# App Configuration
+VITE_APP_TITLE=Vue Todo App
+```
+
+## Scripts
+
+### Available Commands
+
+```bash
+pnpm dev             # Start development server with hot reload
+pnpm build           # Build for production
+pnpm preview         # Preview production build locally
+pnpm lint            # Lint code with ESLint
+pnpm type-check      # TypeScript type checking
+pnpm format          # Format code (if Prettier is configured)
+```
+
+### Using npm instead of pnpm
+
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run preview      # Preview production build
+npm run lint         # Lint code
+```
 
 ## Known Issues
 
-- Created/edited todos may not appear in detail view unless fallback is implemented
-- JSONPlaceholder does not support true persistence, affecting realistic syncing
-- Dexie.js was set up but full offline mutation sync is not implemented
-- SEO improvements are in place, but site performance scoring may vary due to demo API latency
-- Modals are accessible but not fully focus-trapped with libraries like `focus-trap-react`
-- New learnings had to be done in the process to understand some part of the project
+- **Mock API Limitation**: Changes made to Todos via the JSONPlaceholder API are not truly persistent across browser sessions unless cached locally.
+- **Modal Focus Trapping**: Modals are accessible but do not use a dedicated focus-trap library.
+- **Browser Compatibility**: IndexedDB features require modern browsers (IE not supported).
 
 ## Future Improvements
 
-- Enable offline sync with background queue (Dexie + mutation sync)
-- Replace mock API with real backend (e.g., Supabase or Express server)
-- Add authentication and user-specific todos
-- Add status filters (completed/incomplete)
-- Full test coverage and CI/CD integration
-- Add focus-trap to modals for better accessibility
-- Ensure edits stays on reload
+- [ ] **Enhanced Offline Support**: Implement full offline-first architecture with background sync.
+- [ ] **Persistent Backend**: Replace the mock JSONPlaceholder API with a real backend (e.g., Supabase, Firebase, or custom Express/NestJS server).
+- [ ] **Testing Suite**: Add unit tests (Vitest) and end-to-end tests (Cypress/Playwright).
+- [ ] **Authentication**: Add user authentication and authorization with protected routes.
+- [ ] **Rate Limiting**: Implement rate limiting for API requests.
+- [ ] **Docker Support**: Add Dockerfile and docker-compose for easy deployment.
+- [ ] **CI/CD Pipeline**: Set up automated testing and deployment with GitHub Actions.
+- [ ] **Advanced Filters**: Add priority levels, categories, and due dates for todos.
+- [ ] **Drag & Drop**: Implement drag-and-drop reordering of tasks.
+- [ ] **Progressive Web App (PWA)**: Add service workers for full PWA support.
+- [ ] **Multi-language Support**: Implement i18n for internationalization.
+- [ ] **Animations**: Add smooth transitions and micro-interactions.
+
+## Contributing
+
+This is an academic project, but if you'd like to suggest improvements:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## License
 
-This project was submitted as part of the AltSchool Africa Frontend Engineering Program. It is intended solely for academic demonstration and evaluation.
+This project was submitted as part of the **AltSchool Africa Frontend Engineering Program**. It is intended solely for academic demonstration and evaluation.
 
 ## Author
 
 **Temitayo Adebayo**  
 AltSchool Africa – Frontend Engineering  
-Second Semester, Tinyuka Cohort
+Third Semester, Tinyuka Cohort
 
+---
+
+## Acknowledgments
+
+- AltSchool Africa for the project guidelines
+- The Vue.js community for excellent documentation
+
+## Contact
+
+- GitHub: [GitHub Link](https://github.com/Theezigner/exam-todo-vue.git)
+- Live Demo: [Live Demo](https://exam-vue.netlify.app/)
+
+---
