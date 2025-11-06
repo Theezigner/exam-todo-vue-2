@@ -45,8 +45,8 @@ The application features offline-first capabilities using Dexie.js for local dat
 1. **Clone the repository:**
 
 ```bash
-git clone https://github.com/Theezigner/exam-todo-vue.git
-cd exam-todo-vue
+git clone https://github.com/Theezigner/exam-todo-vue-2.git
+cd exam-todo-vue-2
 ```
 
 2. **Install dependencies:**
@@ -351,7 +351,7 @@ Third Semester, Tinyuka Cohort
 
 ## Contact
 
-- GitHub: [GitHub Link](https://github.com/Theezigner/exam-todo-vue.git)
+- GitHub: [GitHub Link](https://github.com/Theezigner/exam-todo-vue-2.git)
 - Live Demo: [Live Demo](https://exam-todo-vue-2-2sr3-git-main-temitayo-adebayos-projects.vercel.app/)
 
 ---
