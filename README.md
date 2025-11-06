@@ -16,11 +16,6 @@ The application features offline-first capabilities using Dexie.js for local dat
 - **Theme Support**: Dark mode toggle with persistent theme preference.
 - **SEO Ready**: Integrated Unhead for meta tag management and SEO optimization.
 
-## Live Demo
-
-- **Deployed App**: [Update this link when deployed]
-- **Source Code**: [Insert Your GitHub URL Here]
-
 ## Table of Contents
 
 - [Installation](#installation)
@@ -50,7 +45,7 @@ The application features offline-first capabilities using Dexie.js for local dat
 1. **Clone the repository:**
 
 ```bash
-git clone [Your GitHub Repository URL]
+git clone https://github.com/Theezigner/exam-todo-vue.git
 cd exam-todo-vue
 ```
 
@@ -357,6 +352,6 @@ Third Semester, Tinyuka Cohort
 ## Contact
 
 - GitHub: [GitHub Link](https://github.com/Theezigner/exam-todo-vue.git)
-- Live Demo: [Live Demo](https://exam-vue.netlify.app/)
+- Live Demo: [Live Demo](https://exam-todo-vue-2-2sr3-git-main-temitayo-adebayos-projects.vercel.app/)
 
 ---
